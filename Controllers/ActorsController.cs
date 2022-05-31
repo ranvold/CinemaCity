@@ -11,54 +11,53 @@ namespace CinemaCity.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GenresController : Controller
+    public class ActorsController : Controller
     {
         private readonly CinemaCityAPIContext _context;
 
-        public GenresController(CinemaCityAPIContext context)
+        public ActorsController(CinemaCityAPIContext context)
         {
             _context = context;
         }
 
-        // GET: api/Genres
+        // GET: api/Actors
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Genre>>> GetGenres()
+        public async Task<ActionResult<IEnumerable<Actor>>> GetActors()
         {
-              return await _context.Genres.ToListAsync();
+            return await _context.Actors.ToListAsync();
         }
 
-        // GET: api/Genres/5
+        // GET: api/Actors/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Genre>> GetGenre(int? id)
+        public async Task<ActionResult<Actor>> GetActor(int? id)
         {
-            if (id == null || _context.Genres == null)
+            if (id == null || _context.Actors == null)
             {
                 return NotFound();
             }
 
-            var genre = await _context.Genres
+            var actor = await _context.Actors
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (genre == null)
+            if (actor == null)
             {
                 return NotFound();
             }
 
-            return genre;
+            return actor;
         }
 
-
-        // PUT: api/Genres/5
+        // PUT: api/Actors/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGenre(int id, Genre genre)
+        public async Task<IActionResult> PutGenre(int id, Actor actor)
         {
-            if (id != genre.Id)
+            if (id != actor.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(genre).State = EntityState.Modified;
+            _context.Entry(actor).State = EntityState.Modified;
 
             try
             {
@@ -66,7 +65,7 @@ namespace CinemaCity.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GenreExists(id))
+                if (!ActorExists(id))
                 {
                     return NotFound();
                 }
@@ -79,38 +78,37 @@ namespace CinemaCity.Controllers
             return NoContent();
         }
 
-
-        // POST: api/Genres
+        // POST: api/Actors
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public async Task<ActionResult<Genre>> PostGenre(Genre genre)
+        public async Task<ActionResult<Actor>> PostActor(Actor actor)
         {
-            _context.Genres.Add(genre);
+            _context.Actors.Add(actor);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetGenre", new { id = genre.Id }, genre);
+            return CreatedAtAction("GetActor", new { id = actor.Id }, actor);
         }
 
-
-        // Delete: api/Genres/5
+        // Delete: api/Actors/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Genre>> DeleteGenre(int id)
+        public async Task<ActionResult<Actor>> DeleteActor(int id)
         {
-            var genre = await _context.Genres.FindAsync(id);
-            if (genre == null)
+            var actor = await _context.Actors.FindAsync(id);
+            if (actor == null)
             {
                 return NotFound();
             }
 
-            _context.Genres.Remove(genre);
+            _context.Actors.Remove(actor);
             await _context.SaveChangesAsync();
 
-            return genre;
+            return actor;
         }
-        private bool GenreExists(int id)
+
+        private bool ActorExists(int id)
         {
-          return _context.Genres.Any(e => e.Id == id);
+          return _context.Actors.Any(e => e.Id == id);
         }
     }
 }
