@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Genres - CinemaCity</title>
+</head>
+<body>
+    <h1>CinemaCity</h1>
+    <h3>Add a genre</h3>
+
+    <form action="javascript:void(0);" method="POST" onsubmit="addGenre()">
+        <input type="text" id="add-name" />
+        <input type="submit" value="Add" />
+    </form>
+
+    <div id="editCategory">
+        <h3>Genre edit</h3>
+        <form action="javascript:void(0);" onsubmit="updateGenre()">
+            <input type="hidden" id="edit-id" />
+            <input type="text" id="edit-name" />
+            <input type="submit" value="Save" />
+            <a onclick="closeInput()" aria-label="Close">&times;</a>
+        </form>
+    </div>
+
+    <table>
+        <tr>
+            <th>Name</th>
+        </tr>
+        <tbody id="genres"></tbody>
+    </table>
+
+    <script src="js/Genres.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getGenres();
+    </script>
+</body>
+</html>

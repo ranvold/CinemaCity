@@ -29,6 +29,9 @@ namespace CinemaCity
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
